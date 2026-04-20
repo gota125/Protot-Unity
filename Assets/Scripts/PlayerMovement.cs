@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+        dash();
     }
 
     void FixedUpdate()
@@ -30,5 +31,10 @@ public class PlayerMovement : MonoBehaviour
         } 
 
         body.linearVelocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+    }
+
+    private void dash()
+    {
+        
     }
 }
