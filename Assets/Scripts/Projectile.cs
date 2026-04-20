@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         Movement();
+        
+        
     }
 
     public void Movement()
