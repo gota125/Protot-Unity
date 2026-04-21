@@ -11,11 +11,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDirection;
     private float _timer;
     private bool _canDash;
+    private bool _canWalk;
     
     
     public float dashDistance = 1.2f;
     public float runSpeed = 20.0f;
     public float dashCoolDown = 1f;
+    public GameObject walkCheck;
     
 
     void Awake ()
@@ -72,8 +74,10 @@ public class PlayerMovement : MonoBehaviour
                _timer = 0f;
            } 
         }
+    }
+
+    private void WalkCheck()
+    {
         
-            
-            
     }
 }
