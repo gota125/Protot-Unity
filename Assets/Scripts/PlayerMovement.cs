@@ -47,6 +47,12 @@ public class PlayerMovement : MonoBehaviour
         //  ---- Dash ----
 
         Dash();
+        
+        // test de issa pour voir un trucs 22h06
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Reload();
+        }
 
     }
 
@@ -82,5 +88,10 @@ public class PlayerMovement : MonoBehaviour
             GameManager.Instance.PlayerDead();
         }
 
+    }
+
+    private void Reload()
+    {
+        GameManager.Instance.PlayerDead();
     }
 }
