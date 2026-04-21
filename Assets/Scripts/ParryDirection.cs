@@ -1,21 +1,33 @@
 using UnityEngine;
 
+
 public class ParryDirection : MonoBehaviour
-{ 
-    [SerializeField] private GameObject zoneparry ;
-    void Update()
+{
+    public Transform player;
+    public float distance = 2F;
+    Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+    
+    void FixedUpdate()
     {
       Parrydirection();  
     }
 
     public void Parrydirection()
     {
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 mouseToWorld = Camera.main .ScreenToWorldPoint(mousePos);
-        mouseToWorld.z = 0;
         
-        transform.rotation = Quaternion.LookRotation(mouseToWorld)  ;
-       
-        
+        if(player == null)return;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        Vector2 direction = (mousePos - player.position).normalized;
+        transform.position = (Vector2)player.position + (direction * distance);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0,0,angle);
     }
+
+   
 }

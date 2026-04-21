@@ -51,5 +51,18 @@ public class EnemyScript : MonoBehaviour
             canon.eulerAngles = new Vector3(0, 0, angle);
         
     }
-    
+
+    void Die()
+    {
+        GameManager.Instance.AddEnemyKill();
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Projectile")
+        {
+            Die();
+        }
+    }
 }
