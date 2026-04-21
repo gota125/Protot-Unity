@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Projectile
+  - Walkable
   layers:
   - Default
   - TransparentFX
