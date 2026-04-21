@@ -5,25 +5,28 @@ using UnityEngine;
 public class Parry : MonoBehaviour
 {
     public bool isParry = false;
+    [SerializeField] private float speed = 10f;
 
     private void FixedUpdate()
     {
-        if (isParry)
+        if (Input.GetKey(KeyCode.Space))
         {
             isParry = true;
+            
         }
         else
         {
             isParry = false;
         }
         
+        
     }
 
     void OnTriggerStay2D(Collider2D other)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                isParry = true;
+            Vector3 mousePos = Input.mousePosition;
+                    Vector3 mouseToWorld = Camera.main .ScreenToWorldPoint(mousePos);
+                    mouseToWorld.z = 0;
 
 
                 if (other.tag == "Projectile" && isParry)
@@ -31,11 +34,11 @@ public class Parry : MonoBehaviour
                     Debug.Log("Parry");
                     Projectile projectile = other.gameObject.GetComponent<Projectile>();
 
-                    projectile.speed = -projectile.speed;
+                    projectile.speed = mouseToWorld*speed;
                 }
 
                 isParry = false;
-            }
+            
         }
     }
 

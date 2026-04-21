@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ParryDirection : MonoBehaviour
 { 
-    [SerializeField] private GameObject player ;
+    [SerializeField] private GameObject zoneparry ;
     void Update()
     {
       Parrydirection();  
@@ -14,7 +14,7 @@ public class ParryDirection : MonoBehaviour
         Vector3 mouseToWorld = Camera.main .ScreenToWorldPoint(mousePos);
         mouseToWorld.z = 0;
         
-        transform.position = player.transform.position   ;
+        transform.rotation = Quaternion.LookRotation(mouseToWorld)  ;
        
         
     }
