@@ -8,10 +8,12 @@ public class Melee_Enemy_Script : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float attackRadius = 0.1f;
     [SerializeField] private float StopNearPlayer;
+    [SerializeField] private float isNearPlayer;
     private Vector3 enemyToPlayer;
     private float enemyToPlayerDist;
 
     private bool canMove = true;
+    private bool StartMove = false;
 
     void Update()
     {
@@ -20,6 +22,7 @@ public class Melee_Enemy_Script : MonoBehaviour
         EnemyToPlayer();
         EnemyMOvement();
         Attack();
+        CanMove();
     }
     public void EnemyToPlayer()
     {
@@ -46,8 +49,23 @@ public class Melee_Enemy_Script : MonoBehaviour
         if (enemyToPlayerDist < attackRadius )
         {
             Debug.Log($"Enemy can attack. Dist is {enemyToPlayerDist}");
-            
         }
-        canMove = enemyToPlayerDist > StopNearPlayer;
+    }
+
+    public void CanMove()
+    {
+        if (enemyToPlayerDist < isNearPlayer)
+        {
+            StartMove = true;
+        }
+        
+        if (enemyToPlayerDist > StopNearPlayer && StartMove == true)
+        {
+            canMove = true;
+        }
+        else
+        {
+            canMove = false;
+        }
     }
 }
