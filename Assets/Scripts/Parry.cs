@@ -7,7 +7,7 @@ public class Parry : MonoBehaviour
     public bool isParry = false;
     [SerializeField] private float speed = 10f;
     public float timer;
-    private float CooldownTime = 2;
+    public float CooldownTime = 2;
     public bool isCooldown = false;
     public Image CooldownImage;
 
