@@ -9,6 +9,7 @@ public class Melee_Enemy_Script : MonoBehaviour
     [SerializeField] private float attackRadius = 0.1f;
     [SerializeField] private float StopNearPlayer;
     [SerializeField] private float isNearPlayer;
+    [SerializeField] private bool activatedVariant = false;
     private Vector3 enemyToPlayer;
     private float enemyToPlayerDist;
 
@@ -20,9 +21,20 @@ public class Melee_Enemy_Script : MonoBehaviour
         enemyToPlayer = player.transform.position - enemy.transform.position;
         enemyToPlayerDist = Vector2.Distance(enemy.transform.position, player.transform.position);
         EnemyToPlayer();
-        EnemyMOvement();
-        Attack();
-        CanMove();
+        if (activatedVariant)
+        {
+            EnemyMOvement();
+            Attack();
+            VarCanMove();
+
+        }
+        else
+        {
+            EnemyMOvement();
+            Attack();
+            CanMove(); 
+        }
+        
     }
     private void EnemyToPlayer()
     {
@@ -60,6 +72,18 @@ public class Melee_Enemy_Script : MonoBehaviour
         }
         
         if (enemyToPlayerDist > StopNearPlayer && StartMove == true)
+        {
+            canMove = true;
+        }
+        else
+        {
+            canMove = false;
+        }
+    }
+
+    private void VarCanMove()
+    {
+        if (enemyToPlayerDist > StopNearPlayer && enemyToPlayerDist < isNearPlayer)
         {
             canMove = true;
         }

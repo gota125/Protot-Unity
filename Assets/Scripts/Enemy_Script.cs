@@ -19,20 +19,38 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private float isNearPlayer;
     private bool canshoot;
     private bool startshoot = false;
+   [SerializeField] private bool acivatedVariant = false;
     
     
     void Update()
     {
         selfToPlayerDist = Vector2.Distance(self.transform.position, player.transform.position);
-        CanShoot();
-        if (canshoot)
+        if (acivatedVariant)
         {
-            AimProjectile();
-            if (Time.time > _timer)
+            VarCanShoot();
+            if (canshoot)
             {
-                FireProjectile();
+                AimProjectile();
+                if (Time.time > _timer)
+                {
+                    FireProjectile();
              
-                _timer = Time.time + fireRate;
+                    _timer = Time.time + fireRate;
+                } 
+            } 
+        }
+        else
+        {
+            CanShoot();
+            if (canshoot)
+            {
+                AimProjectile();
+                if (Time.time > _timer)
+                {
+                    FireProjectile();
+             
+                    _timer = Time.time + fireRate;
+                } 
             } 
         }
         
@@ -86,6 +104,17 @@ public class EnemyScript : MonoBehaviour
         }
         
         if (startshoot)
+        {
+            canshoot = true;
+        }
+        else
+        {
+            canshoot = false;
+        }
+    }
+    private void VarCanShoot()
+    {
+        if (selfToPlayerDist < isNearPlayer)
         {
             canshoot = true;
         }
