@@ -28,7 +28,7 @@ public class Parry : MonoBehaviour
         {
             isParry = false;
             ApplyCooldown();
-            Debug.Log(" parry is not ready");
+            
         }
         
         
@@ -46,7 +46,8 @@ public class Parry : MonoBehaviour
                     Debug.Log("Parry");
                     Projectile projectile = other.gameObject.GetComponent<Projectile>();
                     Vector2 direction = mouseToWorld-projectile.transform.position;
-                    projectile.speed = direction*speed;
+                    projectile.speed = direction.normalized*speed;
+                    print(projectile.speed);
                     ExecuteAction();
                 }
 
@@ -63,7 +64,7 @@ public class Parry : MonoBehaviour
         {
             isCooldown = false;
             CooldownImage.fillAmount = 1f;
-            Debug.Log("ready to parry");
+            
         }
     }
 

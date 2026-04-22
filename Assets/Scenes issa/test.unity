@@ -538,6 +538,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1124358495794394033, guid: aa8aca402cd23fb40aac8cefd0f66089, type: 3}
+      propertyPath: distance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4531020541347866385, guid: aa8aca402cd23fb40aac8cefd0f66089, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.77
@@ -581,6 +585,10 @@ PrefabInstance:
     - target: {fileID: 7416035350553234020, guid: aa8aca402cd23fb40aac8cefd0f66089, type: 3}
       propertyPath: m_Name
       value: prefab player base (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440052764857871595, guid: aa8aca402cd23fb40aac8cefd0f66089, type: 3}
+      propertyPath: timer
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8440052764857871595, guid: aa8aca402cd23fb40aac8cefd0f66089, type: 3}
       propertyPath: CooldownImage
