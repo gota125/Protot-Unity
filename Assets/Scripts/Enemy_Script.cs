@@ -20,43 +20,48 @@ public class EnemyScript : MonoBehaviour
     private bool canshoot;
     private bool startshoot = false;
    [SerializeField] private bool acivatedVariant = false;
-    
-    
-    void Update()
-    {
-        selfToPlayerDist = Vector2.Distance(self.transform.position, player.transform.position);
-        if (acivatedVariant)
-        {
-            VarCanShoot();
-            if (canshoot)
-            {
-                AimProjectile();
-                if (Time.time > _timer)
-                {
-                    FireProjectile();
-             
-                    _timer = Time.time + fireRate;
-                } 
-            } 
-        }
-        else
-        {
-            CanShoot();
-            if (canshoot)
-            {
-                AimProjectile();
-                if (Time.time > _timer)
-                {
-                    FireProjectile();
-             
-                    _timer = Time.time + fireRate;
-                } 
-            } 
-        }
-        
-    }
 
-    void FireProjectile()
+
+   void Update()
+   {
+       if (player != null)
+       {
+           selfToPlayerDist = Vector2.Distance(self.transform.position, player.transform.position);
+
+
+           if (acivatedVariant)
+           {
+               VarCanShoot();
+               if (canshoot)
+               {
+                   AimProjectile();
+                   if (Time.time > _timer)
+                   {
+                       FireProjectile();
+
+                       _timer = Time.time + fireRate;
+                   }
+               }
+           }
+           else
+           {
+               CanShoot();
+               if (canshoot)
+               {
+                   AimProjectile();
+                   if (Time.time > _timer)
+                   {
+                       FireProjectile();
+
+                       _timer = Time.time + fireRate;
+                   }
+               }
+           }
+
+       }
+   }
+
+   void FireProjectile()
     {
         GameObject spawnedMissile = Instantiate(projectilePrefab, spawnPoint.position,Quaternion.identity);
         Projectile projectile = spawnedMissile.GetComponent<Projectile>();
