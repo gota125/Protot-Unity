@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_canDash)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 body.MovePosition(transform.position + moveDirection * dashDistance);
                 _timer = 0f;
