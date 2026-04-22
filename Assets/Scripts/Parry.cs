@@ -45,8 +45,8 @@ public class Parry : MonoBehaviour
                 {
                     Debug.Log("Parry");
                     Projectile projectile = other.gameObject.GetComponent<Projectile>();
-
-                    projectile.speed = mouseToWorld*speed;
+                    Vector2 direction = -projectile.speed;
+                    projectile.speed = direction*speed;
                     ExecuteAction();
                 }
 
