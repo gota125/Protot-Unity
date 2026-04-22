@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (noMoreEnemy)
         {
-            Debug.Log("gameover");
+            SceneManager.LoadScene("first scene protot");
         }
     }
 }
