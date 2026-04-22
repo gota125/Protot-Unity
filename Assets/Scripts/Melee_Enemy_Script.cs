@@ -24,7 +24,7 @@ public class Melee_Enemy_Script : MonoBehaviour
         Attack();
         CanMove();
     }
-    public void EnemyToPlayer()
+    private void EnemyToPlayer()
     {
         Vector2 top = Vector2.up;
         
@@ -37,13 +37,13 @@ public class Melee_Enemy_Script : MonoBehaviour
         else
             enemy.transform.eulerAngles = new Vector3(0, 0, angle);
     }
-    public void EnemyMOvement()
+    private void EnemyMOvement()
     {
         if(canMove)
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
     }
 
-    public void Attack()
+    private void Attack()
     {
         
         if (enemyToPlayerDist < attackRadius )
@@ -52,7 +52,7 @@ public class Melee_Enemy_Script : MonoBehaviour
         }
     }
 
-    public void CanMove()
+    private void CanMove()
     {
         if (enemyToPlayerDist < isNearPlayer)
         {

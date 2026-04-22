@@ -7,21 +7,33 @@ public class EnemyScript : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform spawnPoint;
     public GameObject player;
+    [SerializeField] private GameObject self;
     public Transform canon;
     
+    
     public int projectileSpeed = 5;
+    private float selfToPlayerDist;
     private float _timer;
+    [SerializeField] private float StopNearPlayer;
     public float fireRate = 0.5f;
+    [SerializeField] private float isNearPlayer;
+    private bool canshoot;
+    private bool startshoot = false;
     
     
     void Update()
     {
-        AimProjectile();
-        if (Time.time > _timer)
+        selfToPlayerDist = Vector2.Distance(self.transform.position, player.transform.position);
+        CanShoot();
+        if (canshoot)
         {
-            FireProjectile();
+            AimProjectile();
+            if (Time.time > _timer)
+            {
+                FireProjectile();
              
-             _timer = Time.time + fireRate;
+                _timer = Time.time + fireRate;
+            } 
         }
         
     }
@@ -63,6 +75,23 @@ public class EnemyScript : MonoBehaviour
         if (other.gameObject.tag == "Projectile")
         {
             Die();
+        }
+    }
+
+    private void CanShoot()
+    {
+        if (selfToPlayerDist < isNearPlayer)
+        {
+            startshoot = true;
+        }
+        
+        if (startshoot)
+        {
+            canshoot = true;
+        }
+        else
+        {
+            canshoot = false;
         }
     }
 }
