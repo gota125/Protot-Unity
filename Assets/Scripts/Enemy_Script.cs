@@ -62,11 +62,14 @@ public class EnemyScript : MonoBehaviour
    }
 
    void FireProjectile()
-    {
-        GameObject spawnedMissile = Instantiate(projectilePrefab, spawnPoint.position,Quaternion.identity);
-        Projectile projectile = spawnedMissile.GetComponent<Projectile>();
-        projectile.speed = spawnPoint.up * projectileSpeed;
-    }
+   {
+       GameObject spawnedMissile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+
+       Projectile projectile = spawnedMissile.GetComponent<Projectile>();
+       projectile.speed = spawnPoint.up * projectileSpeed;
+
+       projectile.owner = gameObject;
+   }
     
 
 
@@ -95,7 +98,9 @@ public class EnemyScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Projectile")
+        Projectile proj = other.gameObject.GetComponent<Projectile>();
+
+        if (proj != null && proj.owner != gameObject)
         {
             Die();
         }

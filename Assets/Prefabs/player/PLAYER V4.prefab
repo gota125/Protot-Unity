@@ -224,9 +224,17 @@ PrefabInstance:
       value: -0.0078
       objectReference: {fileID: 0}
     - target: {fileID: 145112628200127765, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 145112628200127765, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
       propertyPath: spriteParry
       value: 
       objectReference: {fileID: 3643830663449164132}
+    - target: {fileID: 145112628200127765, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
+      propertyPath: CooldownTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 145112628200127765, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
       propertyPath: CooldownImage
       value: 
@@ -237,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1281714667736374170, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
       propertyPath: m_Name
-      value: PLayer V1 Variant Variant
+      value: PLAYER V4
       objectReference: {fileID: 0}
     - target: {fileID: 2976187978544634388, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
       propertyPath: m_Name

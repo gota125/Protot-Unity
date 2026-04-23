@@ -4,13 +4,14 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Vector3 speed;
+    public GameObject owner;
     
 
     void Start()
     {
         Destroy(this.gameObject,5);
     }
-    // Update is called once per frame
+    
     void Update()
     {
         Movement();
@@ -25,10 +26,15 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        
+        if (other.gameObject == owner)
+            return;
+
         if (other.gameObject.tag == "Wall")
         {
             Destroy(gameObject);
         }
         
     }
+    
 }

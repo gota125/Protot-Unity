@@ -12,6 +12,7 @@ public class Parry : MonoBehaviour
     public bool isCooldown = false;
     public Image CooldownImage;
     public SpriteRenderer spriteParry;
+    
 
     void Start()
     {
@@ -20,33 +21,20 @@ public class Parry : MonoBehaviour
     }
     private void Update()
     {
-
-         
-        if (Input.GetMouseButton(0)&& isCooldown == false)
+        if (Input.GetMouseButtonDown(0) && isCooldown == false)
         {
-            isParry = true;
-            
-            
-            
-        }
-        else
-        {
-            isParry = false;
-            ApplyCooldown();
-            
+            StartParry();
         }
 
         if (isParry)
         {
-           spriteParry.enabled = true;
+            spriteParry.enabled = true;
         }
-        else 
+        else
         {
-            
-           spriteParry.enabled = false;
+            spriteParry.enabled = false;
+            ApplyCooldown();
         }
-        
-        
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -56,19 +44,21 @@ public class Parry : MonoBehaviour
                     mouseToWorld.z = 0;
 
 
-                if (other.tag == "Projectile" && isParry)
-                {
-                    Debug.Log("Parry");
-                    Projectile projectile = other.gameObject.GetComponent<Projectile>();
-                    Vector2 direction = mouseToWorld-projectile.transform.position;
-                    projectile.speed = direction.normalized*speed;
-                    print(projectile.speed);
-                    ExecuteAction();
-                    
-                }
+                    if (other.tag == "Projectile" && isParry)
+                    {
+                        Debug.Log("Parry");
 
-                isParry = false;
-                
+                        Projectile projectile = other.gameObject.GetComponent<Projectile>();
+
+                        Vector2 direction = mouseToWorld - projectile.transform.position;
+
+                        projectile.speed = direction.normalized * speed;
+                        
+                        projectile.owner = gameObject; //Change le tag du projectile comme ca sa tue l'ennemi auqnd ca revient
+
+                        ExecuteAction();
+                    }
+                    
             
         }
 
@@ -90,5 +80,21 @@ public class Parry : MonoBehaviour
         timer = CooldownTime;
         CooldownImage.fillAmount = 1f;
     }
+    
+    
+    void StartParry() // Fonction et coroutine pour empecher de maintenir le clic de parry 
+    {
+        isParry = true;
+        ExecuteAction();
+        StartCoroutine(ParryDuration());
     }
+
+    IEnumerator ParryDuration()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isParry = false;
+    }
+}
+
+
 
