@@ -11,31 +11,45 @@ public class RandomMove : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movementDirection;
     private float timer;
+    public GameObject self;
+    public RigidbodyConstraints2D constraints;
+    private bool isMoving;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        ChooseNewDirection();
 
-
-
-
+        StartCoroutine(MoveCycle());
     }
+    
 
     void Update()
     {
         timer += Time.deltaTime;
+
         if (timer >= changeDirectionDelay)
         {
             ChooseNewDirection();
             timer = 0;
         }
-    }
 
-    void FixedUpdate()
-    {
-        rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
+        if (!isMoving)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+        else
+        {
+            rb.constraints = RigidbodyConstraints2D.None;
+        }
     }
+    void FixedUpdate()
+        {
+            
+            if (isMoving)
+            {
+                rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
+            }
+        }
 
  void  ChooseNewDirection()
     {
@@ -44,6 +58,19 @@ public class RandomMove : MonoBehaviour
         
         if (movementDirection.x > 0)transform.localScale=new Vector3(-1, 1, 1);
         else if (movementDirection.x < 0)transform.localScale = new Vector3(1, 1, 1);
+    }
+ 
+ 
+    IEnumerator MoveCycle()
+    {
+        while (true)
+        {
+            isMoving = true;
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
+
+            isMoving = false;
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
+        }
     }
  
 }
