@@ -73,7 +73,6 @@ public  class GameManager : MonoBehaviour
    public void PlayerTakeDamage()
    {
       playerHealth--;
-      Debug.Log(" Perd une vie");
    }
 
    public void AddEnemyKill()
@@ -104,16 +103,19 @@ public  class GameManager : MonoBehaviour
    {
       if (Input.GetKeyDown(KeyCode.G))
       {
-         if (godMode == true)
-         {
-            playerHealth = 1000;
-         }
-         
-         if (godMode == false)
-         {
-            playerHealth = 3;
-         }
+          if (godMode == false)
+          {
+             playerHealth = 1000;
+             godMode  = true;
+                  
+          }
+                        
+          else if (godMode == true &&  playerHealth >= 4)
+          {
+             playerHealth = 3;
+             godMode  = false;
+          }
       }
-      
+     
    }
 }
