@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,17 +11,21 @@ public class Parry : MonoBehaviour
     public float CooldownTime = 2;
     public bool isCooldown = false;
     public Image CooldownImage;
+    public SpriteRenderer spriteParry;
 
     void Start()
     {
         CooldownImage.fillAmount = 0f;
         
     }
-    private void FixedUpdate()
+    private void Update()
     {
+
+         
         if (Input.GetMouseButton(0)&& isCooldown == false)
         {
             isParry = true;
+            
             
             
         }
@@ -29,6 +34,16 @@ public class Parry : MonoBehaviour
             isParry = false;
             ApplyCooldown();
             
+        }
+
+        if (isParry)
+        {
+           spriteParry.enabled = true;
+        }
+        else 
+        {
+            
+           spriteParry.enabled = false;
         }
         
         
@@ -49,6 +64,7 @@ public class Parry : MonoBehaviour
                     projectile.speed = direction.normalized*speed;
                     print(projectile.speed);
                     ExecuteAction();
+                    
                 }
 
                 isParry = false;
