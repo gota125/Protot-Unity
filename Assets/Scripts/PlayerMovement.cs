@@ -80,16 +80,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
-    public void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Projectile")
-        {
-            GameManager.Instance.PlayerDead();
-        }
-
-    }
-
+    
     private void Reload()
     {
         GameManager.Instance.PlayerDead();

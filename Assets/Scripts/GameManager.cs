@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public  class GameManager : MonoBehaviour
 {
@@ -7,9 +8,16 @@ public  class GameManager : MonoBehaviour
 
    public int enemiesDestroyed = 0;
    public bool gameOver = false;
+   public int playerHealth = 3;
+   public Image vie1;
+   public Image vie2;
+   public Image vie3;
+   public bool godMode = false;
 
    private void Awake()
    {
+      gameOver = false;
+      
       if (Instance != null && Instance != this)
       {
          Destroy(gameObject);
@@ -20,6 +28,52 @@ public  class GameManager : MonoBehaviour
             Instance = this;
          }
       }
+   }
+   
+   void Update()
+   {
+      HealthManager();
+      PlayerDead();
+      GodMode();
+      
+      if (Input.GetKeyDown(KeyCode.R))
+      {
+         RestartGame();
+         playerHealth = 3;
+      }
+   }
+
+   public void HealthManager()
+   {
+      if (playerHealth == 3)
+      {
+         vie1.enabled = true;
+         vie2.enabled = true;
+         vie3.enabled = true;
+      }
+      else if (playerHealth == 2)
+      {
+         vie1.enabled = true;
+         vie2.enabled = true;
+         vie3.enabled = false;
+      }
+      else if (playerHealth == 1)
+      {
+         vie1.enabled = true;
+         vie2.enabled = false;
+         vie3.enabled = false;
+      }
+      else if (playerHealth == 0)
+      {
+         vie1.enabled = false;
+         vie2.enabled = false;
+         vie3.enabled = false;
+      }
+   }
+   public void PlayerTakeDamage()
+   {
+      playerHealth--;
+      Debug.Log(" Perd une vie");
    }
 
    public void AddEnemyKill()
@@ -32,24 +86,34 @@ public  class GameManager : MonoBehaviour
    }
    public void PlayerDead()
    {
-      if (!gameOver)
+      if (playerHealth <= 0)
       {
          gameOver = true;
-         Debug.Log("gameOver");
+         Debug.Log("Game Over");
       }
    }
-
-   void Update()
-   {
-      if (gameOver && Input.GetKeyDown(KeyCode.R))
-      {
-         RestartGame();
-      }
-   }
+   
 
    public void RestartGame()
    {
       Time.timeScale = 1;
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+   }
+
+   void GodMode()
+   {
+      if (Input.GetKeyDown(KeyCode.G))
+      {
+         if (godMode == true)
+         {
+            playerHealth = 1000;
+         }
+         
+         if (godMode == false)
+         {
+            playerHealth = 3;
+         }
+      }
+      
    }
 }
