@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class melleattack : MonoBehaviour
 {
     public Vector3 speed;
     public GameObject owner;
@@ -10,7 +9,6 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         Destroy(this.gameObject,5);
-        transform.rotation = owner.transform.rotation;
     }
     
     void Update()
@@ -37,5 +35,5 @@ public class Projectile : MonoBehaviour
         }
         
     }
-    
+
 }
