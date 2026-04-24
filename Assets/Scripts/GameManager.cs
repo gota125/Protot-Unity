@@ -29,6 +29,10 @@ public  class GameManager : MonoBehaviour
          }
       }
    }
+   void Start() {
+// Hides the cursor
+      Cursor.visible = false;
+   }
    
    void Update()
    {

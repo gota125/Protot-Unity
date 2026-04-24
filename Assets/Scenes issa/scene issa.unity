@@ -367,6 +367,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 56814050385255369, guid: d39de3e3a233a5c4e8de40c47bcf6ab7, type: 3}
   m_PrefabInstance: {fileID: 1453986209}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &740063201 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7057498372563592072, guid: d39de3e3a233a5c4e8de40c47bcf6ab7, type: 3}
+  m_PrefabInstance: {fileID: 1453986209}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &740063202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,6 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff973930f462e749bcaf503c455256b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RandomMove
+  player: {fileID: 740063201}
 --- !u!1 &828952126
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,12 +712,24 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7057498372563592072, guid: d39de3e3a233a5c4e8de40c47bcf6ab7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0265
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057498372563592072, guid: d39de3e3a233a5c4e8de40c47bcf6ab7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0265
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057498372563592072, guid: d39de3e3a233a5c4e8de40c47bcf6ab7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0265
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057498372563592072, guid: d39de3e3a233a5c4e8de40c47bcf6ab7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.26
+      value: 5.2708
       objectReference: {fileID: 0}
     - target: {fileID: 7057498372563592072, guid: d39de3e3a233a5c4e8de40c47bcf6ab7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.11444
+      value: -1.1143
       objectReference: {fileID: 0}
     - target: {fileID: 7057498372563592072, guid: d39de3e3a233a5c4e8de40c47bcf6ab7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -763,6 +781,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5315363848531425007, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
   m_PrefabInstance: {fileID: 8485804448102798622}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &1572578680 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3139976198118673061, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
+  m_PrefabInstance: {fileID: 8485804448102798622}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1572578684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572578672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb8bf9326cc7ae48b58e067e56bb861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GodMode
+  isGod: 1
+  player: {fileID: 1572578680}
 --- !u!1 &1675920816
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,7 +816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1675920817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1157,6 +1194,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PLayer V1
       objectReference: {fileID: 0}
+    - target: {fileID: 3139976198118673061, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5315363848531425007, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.02
@@ -1200,7 +1241,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1281714667736374170, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1572578684}
   m_SourcePrefab: {fileID: 100100000, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
