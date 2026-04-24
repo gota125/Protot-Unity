@@ -86,8 +86,12 @@ public class Melee_Enemy_Script : MonoBehaviour
             attackBar.fillAmount = time / attackTimer;
         }
 
-        print("Attack !");
-        Destroy(player);
+        if (enemyToPlayerDist < attackRadius)
+        {
+            
+            print("Attack !");
+            Destroy(player);
+        }
         attackBar.fillAmount = 0;
         isAttacking = false;
     }
