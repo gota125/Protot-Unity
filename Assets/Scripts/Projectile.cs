@@ -5,11 +5,12 @@ public class Projectile : MonoBehaviour
 {
     public Vector3 speed;
     public GameObject owner;
+    public float lifeTime;
     
 
     void Start()
     {
-        Destroy(this.gameObject,5);
+        Destroy(this.gameObject,lifeTime);
         transform.rotation = owner.transform.rotation;
     }
     
