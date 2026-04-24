@@ -57,7 +57,7 @@ public class EnemyShotgun : MonoBehaviour
                    {
                        FireShotgun1();
                        FireShotgun2();
-                       FireShotgun3();qdq
+                       FireShotgun3();
 
                        _timer = Time.time + fireRate;
                    }
