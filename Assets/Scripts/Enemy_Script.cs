@@ -18,7 +18,7 @@ public class EnemyScript : MonoBehaviour
     public float fireRate = 0.5f;
     [SerializeField] private float isNearPlayer;
     private bool canshoot;
-    private bool startshoot = false;
+    public bool startshoot = false;
    [SerializeField] private bool acivatedVariant = false;
 
 

@@ -13,6 +13,7 @@ public float probalityToParry=50f;
   {
     
     
+    
     float probality = Random.Range(0, 100);
     if (probality <= probalityToParry)
     {
