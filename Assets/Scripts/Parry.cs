@@ -16,7 +16,7 @@ public class Parry : MonoBehaviour
 
     void Start()
     {
-        CooldownImage.fillAmount = 0f;
+        CooldownImage.fillAmount = 1f;
         
     }
     private void Update()
@@ -91,7 +91,7 @@ public class Parry : MonoBehaviour
 
     IEnumerator ParryDuration()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.02f);
         isParry = false;
     }
 }

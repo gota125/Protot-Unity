@@ -8,6 +8,8 @@ public class EnemyShotgun : MonoBehaviour
     public Transform spawnPoint;
     public Transform spawnPoint1;
     public Transform spawnPoint2;
+    public Transform spawnPoint3;
+    public Transform spawnPoint4;
     public GameObject player;
     [SerializeField] private GameObject self;
     public Transform canon;
@@ -22,6 +24,7 @@ public class EnemyShotgun : MonoBehaviour
     private bool canshoot;
     private bool startshoot = false;
    [SerializeField] private bool acivatedVariant = false;
+    public bool variante5projectile = false;
 
 
    void Update()
@@ -42,6 +45,11 @@ public class EnemyShotgun : MonoBehaviour
                        FireShotgun1();
                        FireShotgun2();
                        FireShotgun3();
+                       if (variante5projectile == true)
+                       {
+                           FireShotgun4();
+                           FireShotgun5();
+                       }
 
                        _timer = Time.time + fireRate;
                    }
@@ -58,6 +66,11 @@ public class EnemyShotgun : MonoBehaviour
                        FireShotgun1();
                        FireShotgun2();
                        FireShotgun3();
+                       if (variante5projectile == true)
+                       {
+                           FireShotgun4();
+                           FireShotgun5();
+                       }
 
                        _timer = Time.time + fireRate;
                    }
@@ -108,6 +121,28 @@ public class EnemyShotgun : MonoBehaviour
        Projectile projectile = spawnedMissile.GetComponent<Projectile>();
        
        projectile.speed = spawnPoint2.up *  projectileSpeed;
+       
+
+       projectile.owner = gameObject;
+   }
+   void FireShotgun4()
+   {
+       GameObject spawnedMissile = Instantiate(projectilePrefab, spawnPoint3.position, Quaternion.identity);
+
+       Projectile projectile = spawnedMissile.GetComponent<Projectile>();
+       
+       projectile.speed = spawnPoint3.up *  projectileSpeed;
+       
+
+       projectile.owner = gameObject;
+   }
+   void FireShotgun5()
+   {
+       GameObject spawnedMissile = Instantiate(projectilePrefab, spawnPoint4.position, Quaternion.identity);
+
+       Projectile projectile = spawnedMissile.GetComponent<Projectile>();
+       
+       projectile.speed = spawnPoint4.up *  projectileSpeed;
        
 
        projectile.owner = gameObject;
