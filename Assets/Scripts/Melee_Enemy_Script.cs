@@ -1,10 +1,16 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Melee_Enemy_Script : MonoBehaviour
 {
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject enemy;
+    public Image attackBar;
+    [SerializeField] private GameObject baseAttackBar;
     [SerializeField] private float speed;
     [SerializeField] private float attackRadius = 0.1f;
     [SerializeField] private float StopNearPlayer;
@@ -12,9 +18,13 @@ public class Melee_Enemy_Script : MonoBehaviour
     [SerializeField] private bool activatedVariant = false;
     private Vector3 enemyToPlayer;
     private float enemyToPlayerDist;
+    public float attackTimer;
+    public float attack;
+    
 
     private bool canMove = true;
     private bool StartMove = false;
+    private bool isAttacking = false;
 
     void Update()
     {
@@ -57,11 +67,29 @@ public class Melee_Enemy_Script : MonoBehaviour
 
     private void Attack()
     {
-        
         if (enemyToPlayerDist < attackRadius )
         {
             Debug.Log($"Enemy can attack. Dist is {enemyToPlayerDist}");
+            if(!isAttacking)
+                StartCoroutine(Attacking());
         }
+    }
+
+    IEnumerator Attacking()
+    {
+        isAttacking = true;
+        float time = 0;
+        while (time < attackTimer)
+        {
+            yield return null;
+            time += Time.deltaTime;
+            attackBar.fillAmount = time / attackTimer;
+        }
+
+        print("Attack !");
+        Destroy(player);
+        attackBar.fillAmount = 0;
+        isAttacking = false;
     }
 
     private void CanMove()
