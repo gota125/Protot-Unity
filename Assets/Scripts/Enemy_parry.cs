@@ -7,12 +7,12 @@ public class Enemy_parry : MonoBehaviour
 {
   public bool enemieParry = false;
 public float probalityToParry=50f;
-
-
+public bool enemieIsShoot;
+public Collider2D himSelf;
   private void Update()
   {
-    
-    
+
+  
     
     float probality = Random.Range(0, 100);
     if (probality <= probalityToParry)
