@@ -7,6 +7,7 @@ TagManager:
   - Projectile
   - Walkable
   - Wall
+  - Ennemy
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public  class GameManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public  class GameManager : MonoBehaviour
    public Image vie2;
    public Image vie3;
    public bool godMode = false;
+   private bool isInvincible = false;
+   public float invincibleCooldown = 0.5f;
 
    private void Awake()
    {
@@ -79,7 +82,14 @@ public  class GameManager : MonoBehaviour
    }
    public void PlayerTakeDamage()
    {
+      if (isInvincible)
+      {
+         return;
+      }
       playerHealth--;
+      
+      StartCoroutine(Invincibility());
+      
    }
 
    public void AddEnemyKill()
@@ -124,5 +134,14 @@ public  class GameManager : MonoBehaviour
           }
       }
      
+   }
+   
+   IEnumerator Invincibility()
+   {
+      isInvincible = true;
+
+      yield return new WaitForSeconds(invincibleCooldown);
+
+      isInvincible = false;
    }
 }
