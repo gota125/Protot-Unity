@@ -21,6 +21,14 @@ public class EnemyScript : MonoBehaviour
     public static bool  startshoot = false;
    [SerializeField] private bool acivatedVariant = false;
 
+   public float ennemyHealth;
+   public float ennemyMaxHealth = 3;
+
+
+   private void Start()
+   {
+       ennemyHealth = ennemyMaxHealth;
+   }
 
    void Update()
    {
@@ -59,6 +67,8 @@ public class EnemyScript : MonoBehaviour
            }
 
        }
+       
+       Die();
    }
 
    void FireProjectile()
@@ -92,8 +102,16 @@ public class EnemyScript : MonoBehaviour
 
     void Die()
     {
-        GameManager.Instance.AddEnemyKill();
-        Destroy(gameObject);
+        if (ennemyHealth <= 0)
+        {
+             GameManager.Instance.AddEnemyKill();
+             Destroy(gameObject);
+        }
+    }
+
+    void EnnemyTakeDamage()
+    {
+        ennemyHealth -= 1;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -102,7 +120,7 @@ public class EnemyScript : MonoBehaviour
 
         if (proj != null && proj.owner != gameObject)
         {
-            Die();
+            EnnemyTakeDamage();
         }
     }
 
