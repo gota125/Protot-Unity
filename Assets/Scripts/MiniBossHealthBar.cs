@@ -2,13 +2,13 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class EnnemyHealthBar : MonoBehaviour
+public class MiniBossHealthBar : MonoBehaviour
 {
     public GameObject healthBarPosition;
     public Canvas healthcanvas;
     public Image ennemyHealth;  
     public Image ennemyHealthBar;  
-    public EnemyScript selfEnemy;
+    public MiniBoss1_Script selfEnemy;
     
    
     
