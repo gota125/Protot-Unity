@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -75,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                Invincible();
+
                 body.MovePosition(transform.position + moveDirection * dashDistance);
                 _timer = 0f;
             }
@@ -85,4 +88,10 @@ public class PlayerMovement : MonoBehaviour
     {
         GameManager.Instance.PlayerDead();
     }
+
+    public void Invincible()
+    {
+        StartCoroutine (GameManager.Invincibility());
+    }
+    
 }

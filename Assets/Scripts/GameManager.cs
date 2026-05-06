@@ -14,8 +14,8 @@ public  class GameManager : MonoBehaviour
    public Image vie2;
    public Image vie3;
    public bool godMode = false;
-   private bool isInvincible = false;
-   public float invincibleCooldown = 0.5f;
+   private static bool isInvincible = false;
+   public static float invincibleCooldown = 0.3f;
 
    private void Awake()
    {
@@ -136,7 +136,7 @@ public  class GameManager : MonoBehaviour
      
    }
    
-   IEnumerator Invincibility()
+   public static IEnumerator Invincibility()
    {
       isInvincible = true;
 
