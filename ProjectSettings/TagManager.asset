@@ -8,6 +8,10 @@ TagManager:
   - Walkable
   - Wall
   - Ennemy
+  - CooldownUpgrade
+  - LifeUpgrade
+  - SpeedUpgrade
+  - Vie
   layers:
   - Default
   - TransparentFX

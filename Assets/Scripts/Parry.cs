@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Parry : MonoBehaviour
 {
+    
+    public static Parry Instance { get; private set; }
+    
     public bool isParry = false;
     [SerializeField] private float speed = 10f;
     public float timer;
@@ -12,6 +15,7 @@ public class Parry : MonoBehaviour
     public bool isCooldown = false;
     public Image CooldownImage;
     public SpriteRenderer spriteParry;
+    [SerializeField] float cooldownTimeReductionOnUpgrade = (float)0.5;
     
 
     void Start()
@@ -19,6 +23,12 @@ public class Parry : MonoBehaviour
         CooldownImage.fillAmount = 1f;
         
     }
+
+    void Awake()
+    {
+        Instance = this;
+    }
+    
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && isCooldown == false)
@@ -94,6 +104,12 @@ public class Parry : MonoBehaviour
         yield return new WaitForSeconds(0.02f);
         isParry = false;
     }
+    
+    public void CooldownUpgrade()
+    {
+        CooldownTime -= cooldownTimeReductionOnUpgrade;
+    }
+    
 }
 
 

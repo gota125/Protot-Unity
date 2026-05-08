@@ -10,9 +10,12 @@ public  class GameManager : MonoBehaviour
    public int enemiesDestroyed = 0;
    public bool gameOver = false;
    public int playerHealth = 3;
+   public int playerMaxHealth = 3;
    public Image vie1;
    public Image vie2;
    public Image vie3;
+   public Image vie4;
+   public Image vie5;
    public bool godMode = false;
    private static bool isInvincible = false;
    public static float invincibleCooldown = 0.3f;
@@ -55,31 +58,76 @@ public  class GameManager : MonoBehaviour
 
    public void HealthManager()
    {
-      if (playerHealth == 3)
+      if (playerHealth == 5)
       {
          vie1.enabled = true;
          vie2.enabled = true;
          vie3.enabled = true;
+         vie4.enabled = true;
+         vie5.enabled = true;
+      }
+      else if (playerHealth == 4)
+      {
+         vie1.enabled = true;
+         vie2.enabled = true;
+         vie3.enabled = true;
+         vie4.enabled = true;
+         vie5.enabled = false;
+      }
+      else if (playerHealth == 3)
+      {
+         vie1.enabled = true;
+         vie2.enabled = true;
+         vie3.enabled = true;
+         vie4.enabled = false;
+         vie5.enabled = false;
       }
       else if (playerHealth == 2)
       {
          vie1.enabled = true;
          vie2.enabled = true;
          vie3.enabled = false;
+         vie4.enabled = false;
+         vie5.enabled = false;
       }
       else if (playerHealth == 1)
       {
          vie1.enabled = true;
          vie2.enabled = false;
          vie3.enabled = false;
+         vie4.enabled = false;
+         vie5.enabled = false;
       }
       else if (playerHealth == 0)
       {
          vie1.enabled = false;
          vie2.enabled = false;
          vie3.enabled = false;
+         vie4.enabled = false;
+         vie5.enabled = false;
       }
+
+      if (playerHealth >= playerMaxHealth)
+      {
+         playerHealth = playerMaxHealth;
+      }
+      
+      
+      
    }
+
+   public void LifeUpgrade()
+   {
+      playerMaxHealth++;
+      playerHealth++;
+   }
+
+   public void Life()
+   {
+      playerHealth++;
+   }
+   
+   
    public void PlayerTakeDamage()
    {
       if (isInvincible)

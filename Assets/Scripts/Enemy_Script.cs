@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject player;
     [SerializeField] private GameObject self;
     public Transform canon;
+    public GameObject lifePrefab;
     
     
     public int projectileSpeed = 5;
@@ -20,6 +21,7 @@ public class EnemyScript : MonoBehaviour
     private bool canshoot;
     public static bool  startshoot = false;
    [SerializeField] private bool acivatedVariant = false;
+   public float lifeSpawnChanceInPourcent = 50f ;
 
    public float ennemyHealth;
    public float ennemyMaxHealth = 3;
@@ -105,8 +107,20 @@ public class EnemyScript : MonoBehaviour
         if (ennemyHealth <= 0)
         {
              GameManager.Instance.AddEnemyKill();
+             SpawnLifeOnDeath();
              Destroy(gameObject);
         }
+    }
+
+    void SpawnLifeOnDeath()
+    {
+        float randomNumber = UnityEngine.Random.Range(0, 100);
+        if (randomNumber <= lifeSpawnChanceInPourcent)
+        {
+            GameObject spawnedlife = Instantiate(lifePrefab, self.transform.position, Quaternion.Euler(0, 0, -45));
+        }
+        
+        
     }
 
     void EnnemyTakeDamage()

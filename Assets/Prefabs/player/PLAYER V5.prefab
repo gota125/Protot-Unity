@@ -276,6 +276,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1476835516335110548, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
+      propertyPath: runSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476835516335110548, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
       propertyPath: dashDistance
       value: 2
       objectReference: {fileID: 0}

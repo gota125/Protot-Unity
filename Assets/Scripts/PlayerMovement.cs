@@ -4,6 +4,8 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance { get; private set; }
+    
     private Rigidbody2D body;
 
     private float horizontal;
@@ -16,14 +18,17 @@ public class PlayerMovement : MonoBehaviour
 
 
     public float dashDistance = 1.2f;
-    public float runSpeed = 20.0f;
+    public float runSpeed = 5f;
     public float dashCoolDown = 1f;
+    public float speedUpgradeAmount = 0.5f;
 
 
 
     void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        Instance = this;
+
 
     }
 
@@ -92,6 +97,11 @@ public class PlayerMovement : MonoBehaviour
     public void Invincible()
     {
         StartCoroutine (GameManager.Invincibility());
+    }
+
+    public void SpeedUpgrade()
+    {
+        runSpeed += speedUpgradeAmount;
     }
     
 }
