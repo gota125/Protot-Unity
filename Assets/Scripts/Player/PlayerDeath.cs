@@ -12,7 +12,7 @@ public class PlayerDeath : MonoBehaviour
         }
         if (other.gameObject.tag == "CooldownUpgrade")
         {
-            Parry.Instance.CooldownUpgrade();
+            Parry.Instance.CooldownUpgrade(0.5f);
             Destroy(other.gameObject);
         }
         if (other.gameObject.tag == "SpeedUpgrade")

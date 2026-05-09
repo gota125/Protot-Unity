@@ -12,6 +12,7 @@ TagManager:
   - LifeUpgrade
   - SpeedUpgrade
   - Vie
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX
