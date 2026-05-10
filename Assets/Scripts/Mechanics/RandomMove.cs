@@ -61,7 +61,7 @@ public class RandomMove : MonoBehaviour
 
  void  ChooseNewDirection()
     {
-        float randomAngle = Random.Range(0, 360);
+        float randomAngle = Random.Range(0, 360) * Mathf.Deg2Rad;;
         movementDirection = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle) );
         
         if (movementDirection.x > 0)transform.localScale=new Vector3(-1, 1, 1);

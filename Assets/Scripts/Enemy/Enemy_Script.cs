@@ -1,7 +1,14 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyScript : MonoBehaviour
 {
+    public enum ShootType
+    {
+        Single,
+        Shotgun,
+        Burst
+    }
     [Header("References")]
     public GameObject projectilePrefab;
     public GameObject lifePrefab;
@@ -16,12 +23,25 @@ public class EnemyScript : MonoBehaviour
     public int projectileSpeed = 5;
     public float fireRate = 0.5f;
     [SerializeField] private float detectionRange;
+    public ShootType shootType = ShootType.Single;
 
     private float nextFireTime;
     private float distanceToPlayer;
     private bool canShoot;
     private bool hasStartedShooting = false;
     public bool HasDetectedPlayer => hasStartedShooting;
+
+    [Header("Shotgun Settings")]
+    public int shotgunProjectileCount = 3;
+    public float shotgunSpreadAngle = 20f;
+    
+    
+    [Header("Burst Settings")]
+    public int burstProjectileCount = 3;
+    public float burstDelay = 0.1f;
+    public float burstAngleVariation = 10f;
+
+    private bool isBursting = false;
 
     [Header("Health")]
     public float enemyMaxHealth = 3;
@@ -49,6 +69,7 @@ public class EnemyScript : MonoBehaviour
                 if (Time.time > nextFireTime)
                 {
                     FireProjectile();
+
                     nextFireTime = Time.time + fireRate;
                 }
             }
@@ -70,17 +91,34 @@ public class EnemyScript : MonoBehaviour
         canShoot = hasStartedShooting;
     }
 
-    private void FireProjectile()
+    private void SpawnProjectile(float angleOffset)
     {
-        GameObject spawnedMissile = Instantiate(
-            projectilePrefab,
-            spawnPoint.position,
-            Quaternion.identity
-        );
+        Quaternion rotation = spawnPoint.rotation * Quaternion.Euler(0, 0, angleOffset);
+
+        GameObject spawnedMissile = Instantiate(projectilePrefab, spawnPoint.position, rotation);
 
         Projectile projectile = spawnedMissile.GetComponent<Projectile>();
-        projectile.speed = spawnPoint.up * projectileSpeed;
+
+        projectile.speed = rotation * Vector2.up * projectileSpeed;
         projectile.owner = gameObject;
+    }
+    
+    private void FireProjectile()
+    {
+        switch (shootType)
+        {
+            case ShootType.Single:
+                SpawnProjectile(0f);
+                break;
+
+            case ShootType.Shotgun:
+                FireShotgun();
+                break;
+            case ShootType.Burst:
+                if (!isBursting)
+                    StartCoroutine(BurstFire());
+                break;
+        }
     }
 
     private void AimProjectile()
@@ -132,5 +170,41 @@ public class EnemyScript : MonoBehaviour
         {
             TakeDamage();
         }
+    }
+    
+    private void FireShotgun()
+    {
+        if (shotgunProjectileCount <= 1)
+        {
+            SpawnProjectile(0f);
+            return;
+        }
+
+        float angleStep = shotgunSpreadAngle / (shotgunProjectileCount - 1);
+        float startAngle = -shotgunSpreadAngle / 2f;
+
+        for (int i = 0; i < shotgunProjectileCount; i++)
+        {
+            float angle = startAngle + (angleStep * i);
+            SpawnProjectile(angle);
+        }
+    }
+    private IEnumerator BurstFire()
+    {
+        isBursting = true;
+
+        for (int i = 0; i < burstProjectileCount; i++)
+        {
+            float randomAngle = Random.Range(
+                -burstAngleVariation,
+                burstAngleVariation
+            );
+
+            SpawnProjectile(randomAngle);
+
+            yield return new WaitForSeconds(burstDelay);
+        }
+
+        isBursting = false;
     }
 }

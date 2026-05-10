@@ -33,7 +33,15 @@ public class PlayerDeath : MonoBehaviour
         
     }
 
-     
+     private void Update()
+    {
+        if (GameManager.Instance.gameOver == true)
+        {
+            Destroy(gameObject); 
+            Debug.Log("Game Over");
+        }
+        
+    }
      
      
 }
