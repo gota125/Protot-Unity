@@ -210,6 +210,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &194343674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5928390628248833945, guid: cd8b9a1a1010ca14498271d4dcc0dce2, type: 3}
+  m_PrefabInstance: {fileID: 1732550594799374540}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &288262323 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6820220599037519828, guid: 9bc0db2371820b047a1e10ec79a96349, type: 3}
@@ -293,12 +298,58 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9177718432487542103, guid: cd8b9a1a1010ca14498271d4dcc0dce2, type: 3}
   m_PrefabInstance: {fileID: 1732550594799374540}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 194343674}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4e191c459dd6354fa8156086131d951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovingPlatform
+--- !u!61 &657943070
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194343674}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!4 &736615729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1246335500413200503, guid: 9ff8d28315e06a14781105271909a95c, type: 3}
@@ -387,7 +438,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -500,7 +551,7 @@ GameObject:
   - component: {fileID: 929374396}
   - component: {fileID: 929374398}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: parry zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -614,7 +665,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: -0.00000047683716, y: 0.0000009536743}
-  m_Radius: 1.61
+  m_Radius: 1.89
 --- !u!1001 &980465687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -961,11 +1012,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7980265701986217697, guid: 68ea3878884eb41418dbc0a5a4fb8d08, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.63
+      value: -44.76
       objectReference: {fileID: 0}
     - target: {fileID: 7980265701986217697, guid: 68ea3878884eb41418dbc0a5a4fb8d08, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.51
+      value: 28.47
       objectReference: {fileID: 0}
     - target: {fileID: 7980265701986217697, guid: 68ea3878884eb41418dbc0a5a4fb8d08, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1141,7 +1192,7 @@ GameObject:
   - component: {fileID: 1860170633}
   - component: {fileID: 1860170636}
   m_Layer: 0
-  m_Name: Isometric Diamond
+  m_Name: bouton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1424,7 +1475,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5928390628248833945, guid: cd8b9a1a1010ca14498271d4dcc0dce2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 657943070}
   m_SourcePrefab: {fileID: 100100000, guid: cd8b9a1a1010ca14498271d4dcc0dce2, type: 3}
 --- !u!1001 &2582358790895140183
 PrefabInstance:
