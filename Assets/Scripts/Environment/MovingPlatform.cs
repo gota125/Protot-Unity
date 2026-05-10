@@ -16,7 +16,7 @@ public class MovingPlatform : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, startPoint.position, speed * Time.deltaTime);
+            
         }
     }
 

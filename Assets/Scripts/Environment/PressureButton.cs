@@ -7,7 +7,7 @@ public class PressureButton : MonoBehaviour
     public Color idleColor = Color.red;
     
     private SpriteRenderer sr;
-    private int objectsOnButton = 0; // Pour gérer si plusieurs objets sont dessus
+    private int objectsOnButton = 0; 
 
     void Start()
     {
@@ -43,8 +43,8 @@ public class PressureButton : MonoBehaviour
         }
         else
         {
-            sr.color = idleColor;
-            platform.SetMoving(false);
+            
+            
         }
     }
 }
