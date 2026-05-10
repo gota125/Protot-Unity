@@ -23,7 +23,7 @@ public class EnnemyHealthBar : MonoBehaviour
     
     private void UpdateHealthBar()
     {
-        ennemyHealth.fillAmount = (float)selfEnemy.ennemyHealth / selfEnemy.ennemyMaxHealth;
+        ennemyHealth.fillAmount = (float)selfEnemy.enemyHealth / selfEnemy.enemyMaxHealth;
     }
     
     
@@ -34,7 +34,7 @@ public class EnnemyHealthBar : MonoBehaviour
     
     private void ShowHealthBar()
     {
-        ennemyHealth.gameObject.SetActive(selfEnemy.ennemyHealth < selfEnemy.ennemyMaxHealth);
-        ennemyHealthBar.gameObject.SetActive(selfEnemy.ennemyHealth < selfEnemy.ennemyMaxHealth);
+        ennemyHealth.gameObject.SetActive(selfEnemy.enemyHealth < selfEnemy.enemyMaxHealth);
+        ennemyHealthBar.gameObject.SetActive(selfEnemy.enemyHealth < selfEnemy.enemyMaxHealth);
     }
 }

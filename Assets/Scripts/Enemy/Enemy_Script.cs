@@ -1,131 +1,127 @@
-using System;
-using Mono.Cecil;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    [Header("References")]
     public GameObject projectilePrefab;
-    public Transform spawnPoint;
-    public GameObject player;
-    [SerializeField] private GameObject self;
-    public Transform canon;
     public GameObject lifePrefab;
+    public GameObject player;
+    public Transform spawnPoint;
+    public Transform canon;
     
-    
+
+    [SerializeField] private GameObject self;
+
+    [Header("Shooting Settings")]
     public int projectileSpeed = 5;
-    private float selfToPlayerDist;
-    private float _timer;
-    [SerializeField] private float StopNearPlayer;
     public float fireRate = 0.5f;
-    [SerializeField] private float isNearPlayer;
-    private bool canshoot;
-    private  bool  startshoot = false;
-   [SerializeField] private bool acivatedVariant = false;
-   public float lifeSpawnChanceInPourcent = 50f ;
+    [SerializeField] private float detectionRange;
 
-   public float ennemyHealth;
-   public float ennemyMaxHealth = 3;
+    private float nextFireTime;
+    private float distanceToPlayer;
+    private bool canShoot;
+    private bool hasStartedShooting = false;
+    public bool HasDetectedPlayer => hasStartedShooting;
 
+    [Header("Health")]
+    public float enemyMaxHealth = 3;
+    public float enemyHealth;
 
-   private void Start()
-   {
-       ennemyHealth = ennemyMaxHealth;
-   }
+    [Header("Loot")]
+    public float lifeSpawnChancePercent = 50f;
 
-   void Update()
-   {
-       if (player != null)
-       {
-           selfToPlayerDist = Vector2.Distance(self.transform.position, player.transform.position);
-
-
-           if (acivatedVariant)
-           {
-               VarCanShoot();
-               if (canshoot)
-               {
-                   AimProjectile();
-                   if (Time.time > _timer)
-                   {
-                       FireProjectile();
-
-                       _timer = Time.time + fireRate;
-                   }
-               }
-           }
-           else
-           {
-               CanShoot();
-               if (canshoot)
-               {
-                   AimProjectile();
-                   if (Time.time > _timer)
-                   {
-                       FireProjectile();
-
-                       _timer = Time.time + fireRate;
-                   }
-               }
-           }
-
-       }
-       
-       Die();
-   }
-
-   void FireProjectile()
-   {
-       GameObject spawnedMissile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-
-       Projectile projectile = spawnedMissile.GetComponent<Projectile>();
-       projectile.speed = spawnPoint.up * projectileSpeed;
-
-       projectile.owner = gameObject;
-   }
-    
-
-
-    public void AimProjectile()
+    private void Start()
     {
-        
-        Vector3 canonToPlayer = player.transform.position - canon.position;
-        Vector3 top = Vector3.up;
-        
-        float angle = Vector3.Angle(canonToPlayer, top);
-        
-        Vector3 cross = Vector3.Cross(canonToPlayer, top);
-        
-        if(cross.z > 0)
-            canon.eulerAngles = new Vector3(0, 0, -angle);
-        else
-            canon.eulerAngles = new Vector3(0, 0, angle);
-        
+        enemyHealth = enemyMaxHealth;
     }
 
-    void Die()
+    private void Update()
     {
-        if (ennemyHealth <= 0)
+        if (player != null)
         {
-             GameManager.Instance.AddEnemyKill();
-             SpawnLifeOnDeath();
-             Destroy(gameObject);
+            UpdateDistanceToPlayer();
+            UpdateShootingState();
+
+            if (canShoot)
+            {
+                AimProjectile();
+
+                if (Time.time > nextFireTime)
+                {
+                    FireProjectile();
+                    nextFireTime = Time.time + fireRate;
+                }
+            }
+        }
+
+        CheckDeath();
+    }
+
+    private void UpdateDistanceToPlayer()
+    {
+        distanceToPlayer = Vector2.Distance(self.transform.position, player.transform.position);
+    }
+
+    private void UpdateShootingState()
+    {
+        if (distanceToPlayer < detectionRange)
+            hasStartedShooting = true;
+
+        canShoot = hasStartedShooting;
+    }
+
+    private void FireProjectile()
+    {
+        GameObject spawnedMissile = Instantiate(
+            projectilePrefab,
+            spawnPoint.position,
+            Quaternion.identity
+        );
+
+        Projectile projectile = spawnedMissile.GetComponent<Projectile>();
+        projectile.speed = spawnPoint.up * projectileSpeed;
+        projectile.owner = gameObject;
+    }
+
+    private void AimProjectile()
+    {
+        Vector3 directionToPlayer = player.transform.position - canon.position;
+
+        float angle = Vector3.Angle(directionToPlayer, Vector3.up);
+        Vector3 cross = Vector3.Cross(directionToPlayer, Vector3.up);
+
+        canon.eulerAngles = cross.z > 0
+            ? new Vector3(0, 0, -angle)
+            : new Vector3(0, 0, angle);
+    }
+
+    private void TakeDamage()
+    {
+        enemyHealth -= 1;
+    }
+
+    private void CheckDeath()
+    {
+        if (enemyHealth <= 0)
+        {
+            GameManager.Instance.AddEnemyKill();
+            SpawnLifeOnDeath();
+            Destroy(gameObject);
         }
     }
 
-    void SpawnLifeOnDeath()
+    private void SpawnLifeOnDeath()
     {
-        float randomNumber = UnityEngine.Random.Range(0, 100);
-        if (randomNumber <= lifeSpawnChanceInPourcent)
-        {
-            GameObject spawnedlife = Instantiate(lifePrefab, self.transform.position, Quaternion.Euler(0, 0, -45));
-        }
-        
-        
-    }
+        float randomNumber = Random.Range(0, 100);
 
-    void EnnemyTakeDamage()
-    {
-        ennemyHealth -= 1;
+        if (randomNumber <= lifeSpawnChancePercent)
+        {
+            Instantiate(
+                lifePrefab,
+                self.transform.position,
+                Quaternion.Euler(0, 0, -45)
+            );
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -134,35 +130,7 @@ public class EnemyScript : MonoBehaviour
 
         if (proj != null && proj.owner != gameObject)
         {
-            EnnemyTakeDamage();
-        }
-    }
-
-    private void CanShoot()
-    {
-        if (selfToPlayerDist < isNearPlayer)
-        {
-            startshoot = true;
-        }
-        
-        if (startshoot)
-        {
-            canshoot = true;
-        }
-        else
-        {
-            canshoot = false;
-        }
-    }
-    private void VarCanShoot()
-    {
-        if (selfToPlayerDist < isNearPlayer)
-        {
-            canshoot = true;
-        }
-        else
-        {
-            canshoot = false;
+            TakeDamage();
         }
     }
 }

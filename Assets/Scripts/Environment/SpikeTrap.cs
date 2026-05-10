@@ -56,7 +56,7 @@ public class SpikeTrap : MonoBehaviour
             if (enemy != null)
             {
                 
-                enemy.ennemyHealth -= 1;
+                enemy.enemyHealth -= 1;
                 
                 Debug.Log("Un ennemi a été empalé !");
 

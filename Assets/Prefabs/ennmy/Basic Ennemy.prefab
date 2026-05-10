@@ -291,19 +291,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Script
   projectilePrefab: {fileID: 7495483748815174451, guid: 8af5ceef16c8f6e4ca6bf92e57a09bd2, type: 3}
-  spawnPoint: {fileID: 5060222857680292714}
-  player: {fileID: 0}
-  self: {fileID: 4537997475002958924}
-  canon: {fileID: 7837591979779949718}
   lifePrefab: {fileID: 6427181072588387373, guid: 543053758d576be45918a0716abf12fe, type: 3}
+  player: {fileID: 0}
+  spawnPoint: {fileID: 5060222857680292714}
+  canon: {fileID: 7837591979779949718}
+  self: {fileID: 4537997475002958924}
   projectileSpeed: 4
-  StopNearPlayer: 0
   fireRate: 1.5
-  isNearPlayer: 5
-  acivatedVariant: 0
-  lifeSpawnChanceInPourcent: 30
-  ennemyHealth: 3
-  ennemyMaxHealth: 3
+  detectionRange: 6
+  enemyMaxHealth: 3
+  enemyHealth: 0
+  lifeSpawnChancePercent: 20
 --- !u!50 &7737716169470305663
 Rigidbody2D:
   serializedVersion: 5

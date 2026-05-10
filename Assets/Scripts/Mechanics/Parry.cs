@@ -72,7 +72,6 @@ public class Parry : MonoBehaviour
                 // On arrête la parade immédiatement après un succès pour éviter de parer 50 fois
                 isParry = false; 
                 
-                // On peut aussi déclencher un petit effet ici (Camera Shake ?)
             }
         }
     }

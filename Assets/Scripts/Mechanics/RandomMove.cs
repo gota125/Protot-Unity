@@ -14,17 +14,28 @@ public class RandomMove : MonoBehaviour
     public GameObject self;
     public RigidbodyConstraints2D constraints;
     private bool isMoving;
+    
+    private EnemyScript enemyScript;
 
-    void Start()
+
+    private void Start()
     {
+        enemyScript = GetComponent<EnemyScript>();
         rb = GetComponent<Rigidbody2D>();
 
         StartCoroutine(MoveCycle());
     }
     
+    
 
     void Update()
     {
+        if (!enemyScript.HasDetectedPlayer)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            return;
+        }
+
         timer += Time.deltaTime;
 
         if (timer >= changeDirectionDelay)
@@ -33,23 +44,20 @@ public class RandomMove : MonoBehaviour
             timer = 0;
         }
 
-        if (!isMoving)
-        {
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        }
-        else
-        {
-            rb.constraints = RigidbodyConstraints2D.None;
-        }
+        rb.constraints = isMoving
+            ? RigidbodyConstraints2D.None
+            : RigidbodyConstraints2D.FreezeAll;
     }
     void FixedUpdate()
+    {
+        if (!enemyScript.HasDetectedPlayer)
+            return;
+
+        if (isMoving)
         {
-            
-            if (isMoving)
-            {
-                rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
-            }
+            rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
         }
+    }
 
  void  ChooseNewDirection()
     {
