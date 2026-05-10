@@ -305,7 +305,7 @@ MonoBehaviour:
   burstProjectileCount: 3
   burstDelay: 0.1
   burstAngleVariation: 10
-  enemyMaxHealth: 2
+  enemyMaxHealth: 1
   enemyHealth: 0
   lifeSpawnChancePercent: 20
 --- !u!50 &7737716169470305663

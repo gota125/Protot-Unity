@@ -21,6 +21,10 @@ PrefabInstance:
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 419770534773713766, guid: 78f4b520bd41283428708dc916038bd6, type: 3}
+      propertyPath: enemyMaxHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 419770534773713766, guid: 78f4b520bd41283428708dc916038bd6, type: 3}
       propertyPath: burstProjectileCount
       value: 5
       objectReference: {fileID: 0}
