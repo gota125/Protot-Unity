@@ -6,7 +6,7 @@ public class EnemyParry : MonoBehaviour
     [Range(0, 100)] 
     public float parryChance = 50f; 
     public float reflectSpeedMultiplier = 1.2f;
-
+    public Color projectileColor = Color.green;
     [Header("References")]
     public Collider2D enemyCollider; // Ton "himSelf"
 
@@ -44,6 +44,6 @@ public class EnemyParry : MonoBehaviour
         projectile.speed = -projectile.speed * reflectSpeedMultiplier;
 
         // Redevenir le propriétaire (devient rouge)
-        projectile.ChangeOwnership(gameObject, Color.red); 
+        projectile.ChangeOwnership(gameObject, projectileColor); 
     }
     }

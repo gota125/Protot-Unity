@@ -30,6 +30,10 @@ public class PlayerDeath : MonoBehaviour
             GameManager.Instance.Life();
             Destroy(other.gameObject);
         }
+        if (other.gameObject.tag == "EnemyProjectile")
+        {
+            GameManager.Instance.PlayerTakeDamage();
+        }
         
     }
 

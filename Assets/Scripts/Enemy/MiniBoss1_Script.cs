@@ -25,7 +25,7 @@ public class MiniBoss1_Script : MonoBehaviour
     public float fireRateRotatif = 0.5f;
     [SerializeField] private float isNearPlayer;
     private bool canshoot;
-    public static bool  startshoot = false;
+    public  bool  startshoot = false;
    [SerializeField] private bool acivatedVariant = false;
 
    public float ennemyHealth;
