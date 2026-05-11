@@ -192,7 +192,7 @@ public  class GameManager : MonoBehaviour
              godMode  = false;
              PlayerMovement.Instance.runSpeed =  5f ;
              PlayerMovement.Instance.dashCoolDown = 1f;
-             Parry.Instance.cooldownTime = 0.1f;
+             Parry.Instance.cooldownTime = 1.5f;
           }
       }
      
