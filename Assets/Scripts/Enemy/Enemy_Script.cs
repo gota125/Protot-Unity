@@ -8,7 +8,8 @@ public class EnemyScript : MonoBehaviour
         Single,
         Shotgun,
         Burst,
-        ProjectileVariant
+        ProjectileVariant,
+        Sniper
     }
     [Header("References")]
     public GameObject projectilePrefab;
@@ -45,6 +46,15 @@ public class EnemyScript : MonoBehaviour
     public float burstAngleVariation = 10f;
 
     private bool isBursting = false;
+    
+    [Header("Sniper Settings")]
+    public LineRenderer laser;
+    public float aimDuration = 2f;
+    public float blinkSpeed = 0.15f;
+    public float sniperProjectileSpeed = 20f;
+    public float sniperCooldown = 1f;
+
+    private bool isSniping = false;
 
     [Header("Health")]
     public float enemyMaxHealth = 3;
@@ -141,6 +151,10 @@ public class EnemyScript : MonoBehaviour
             case ShootType.ProjectileVariant:
                 SpawnProjectileVariant(0f);
                 break;
+            case ShootType.Sniper:
+                if (!isSniping)
+                    StartCoroutine(SniperShot());
+                break;
         }
     }
 
@@ -229,5 +243,62 @@ public class EnemyScript : MonoBehaviour
         }
 
         isBursting = false;
+    }
+    
+    private IEnumerator SniperShot()
+    {
+        isSniping = true;
+        laser.enabled = true;
+
+        float timer = 0f;
+        bool isRed = true;
+
+        while (timer < aimDuration)
+        {
+            UpdateLaserAim();
+
+            laser.startColor = isRed ? Color.red : Color.indianRed;
+            laser.endColor = isRed ? Color.red : Color.indianRed;
+
+            isRed = !isRed;
+
+            yield return new WaitForSeconds(blinkSpeed);
+
+            timer += blinkSpeed;
+        }
+
+        FireSniperProjectile();
+
+        laser.enabled = false;
+
+        yield return new WaitForSeconds(sniperCooldown);
+
+        isSniping = false;
+    }
+    
+    private void UpdateLaserAim()
+    {
+        if (player == null) return;
+
+        Vector3 direction = (player.transform.position - spawnPoint.position).normalized;
+
+        laser.SetPosition(0, spawnPoint.position);
+        laser.SetPosition(1, spawnPoint.position + direction * 40f);
+    }
+    
+    private void FireSniperProjectile()
+    {
+        Vector3 direction = (player.transform.position - spawnPoint.position).normalized;
+
+        GameObject projectileObj = Instantiate(
+            projectilePrefab,
+            spawnPoint.position,
+            Quaternion.identity
+        );
+
+        Projectile projectile = projectileObj.GetComponent<Projectile>();
+
+        projectile.speed = direction * sniperProjectileSpeed;
+        projectile.owner = gameObject;
     }
 }
