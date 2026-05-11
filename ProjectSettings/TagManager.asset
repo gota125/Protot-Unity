@@ -13,6 +13,7 @@ TagManager:
   - SpeedUpgrade
   - Vie
   - EnemyProjectile
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

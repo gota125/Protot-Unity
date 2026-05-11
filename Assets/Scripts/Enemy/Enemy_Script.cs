@@ -84,7 +84,7 @@ public class EnemyScript : MonoBehaviour
     private void UpdateDistanceToPlayer()
     {
         distanceToPlayer = Vector2.Distance(self.transform.position, player.transform.position);
-        Debug.Log(distanceToPlayer);
+        
     }
 
     private void UpdateShootingState()
@@ -96,7 +96,7 @@ public class EnemyScript : MonoBehaviour
             canShoot = false;
         }
 
-        Debug.Log(canShoot);
+        
     }
 
     private void SpawnProjectile(float angleOffset)

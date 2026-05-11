@@ -301,6 +301,7 @@ MonoBehaviour:
   fireRate: 1.5
   detectionRange: 6
   shootType: 0
+  forgetPlayer: 12
   shotgunProjectileCount: 3
   shotgunSpreadAngle: 20
   burstProjectileCount: 3

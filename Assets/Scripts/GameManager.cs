@@ -153,7 +153,6 @@ public  class GameManager : MonoBehaviour
       if (playerHealth <= 0)
       {
          gameOver = true;
-         Debug.Log("Game Over");
       }
    }
    
@@ -162,6 +161,12 @@ public  class GameManager : MonoBehaviour
    {
       Time.timeScale = 1;
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+   }
+   
+   public void ResetPlayer()
+   {
+      gameOver = false;
+      playerHealth = playerMaxHealth;
    }
 
    void GodMode()

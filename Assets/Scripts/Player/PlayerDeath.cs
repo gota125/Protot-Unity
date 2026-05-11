@@ -34,18 +34,23 @@ public class PlayerDeath : MonoBehaviour
         {
             GameManager.Instance.PlayerTakeDamage();
         }
-        
-    }
-
-     private void Update()
-    {
-        if (GameManager.Instance.gameOver == true)
+        if (other.gameObject.tag == "Checkpoint")
         {
-            Destroy(gameObject); 
-            Debug.Log("Game Over");
+            GameManager.Instance.PlayerTakeDamage();
         }
         
     }
+    
+    
+    private void Update()
+    {
+        if (GameManager.Instance.gameOver)
+        {
+            GetComponent<PlayerCheckpoint_Script>().Respawn();
+        }
+    }
+
+  
      
      
 }
