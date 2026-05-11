@@ -7,10 +7,12 @@ public class EnemyScript : MonoBehaviour
     {
         Single,
         Shotgun,
-        Burst
+        Burst,
+        ProjectileVariant
     }
     [Header("References")]
     public GameObject projectilePrefab;
+    public GameObject projectileImparablePrefab;
     public GameObject lifePrefab;
     public GameObject player;
     public Transform spawnPoint;
@@ -103,6 +105,18 @@ public class EnemyScript : MonoBehaviour
         projectile.owner = gameObject;
     }
     
+    private void SpawnProjectileVariant(float angleOffset)
+    {
+        Quaternion rotation = spawnPoint.rotation * Quaternion.Euler(0, 0, angleOffset);
+
+        GameObject spawnedMissile = Instantiate(projectileImparablePrefab, spawnPoint.position, rotation);
+
+        Projectile projectile = spawnedMissile.GetComponent<Projectile>();
+
+        projectile.speed = rotation * Vector2.up * projectileSpeed;
+        projectile.owner = gameObject;
+    }
+    
     private void FireProjectile()
     {
         switch (shootType)
@@ -117,6 +131,9 @@ public class EnemyScript : MonoBehaviour
             case ShootType.Burst:
                 if (!isBursting)
                     StartCoroutine(BurstFire());
+                break;
+            case ShootType.ProjectileVariant:
+                SpawnProjectileVariant(0f);
                 break;
         }
     }
