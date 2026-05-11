@@ -32,7 +32,7 @@ public class Checkpoint_Script: MonoBehaviour
     {
         if (currentActiveCheckpoint != null)
         {
-            currentActiveCheckpoint.Deactivate();
+            currentActiveCheckpoint.DeactivateCheckpoint();
         }
 
         currentActiveCheckpoint = this;
@@ -45,7 +45,7 @@ public class Checkpoint_Script: MonoBehaviour
         Debug.Log("Checkpoint activé");
     }
 
-    private void Deactivate()
+    private void DeactivateCheckpoint()
     {
         if (spriteRenderer != null)
         {
