@@ -140,11 +140,6 @@ public class Melee_Enemy_Script : MonoBehaviour
             
             projectile.owner = gameObject;
     }
-    void Die()
-    {
-        GameManager.Instance.AddEnemyKill();
-        Destroy(gameObject);
-    }
     private void OnCollisionEnter2D(Collision2D other)
     {
         Projectile proj = other.gameObject.GetComponent<Projectile>();

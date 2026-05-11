@@ -29,9 +29,10 @@ public class EnemyScript : MonoBehaviour
 
     private float nextFireTime;
     private float distanceToPlayer;
-    private bool canShoot;
+    private bool canShoot = false;
     private bool hasStartedShooting = false;
     public bool HasDetectedPlayer => hasStartedShooting;
+    [SerializeField] private float forgetPlayer; 
 
     [Header("Shotgun Settings")]
     public int shotgunProjectileCount = 3;
@@ -83,14 +84,19 @@ public class EnemyScript : MonoBehaviour
     private void UpdateDistanceToPlayer()
     {
         distanceToPlayer = Vector2.Distance(self.transform.position, player.transform.position);
+        Debug.Log(distanceToPlayer);
     }
 
     private void UpdateShootingState()
     {
         if (distanceToPlayer < detectionRange)
-            hasStartedShooting = true;
+            canShoot = true;
+        if (distanceToPlayer > forgetPlayer)
+        {
+            canShoot = false;
+        }
 
-        canShoot = hasStartedShooting;
+        Debug.Log(canShoot);
     }
 
     private void SpawnProjectile(float angleOffset)
