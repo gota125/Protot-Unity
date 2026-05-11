@@ -1,24 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Melee_Enemy_Script : MonoBehaviour
 {
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject enemy;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject lifePrefab;
+    [SerializeField] private Transform spawnPoint;
     public Image attackBar;
     [SerializeField] private float speed;
     [SerializeField] private float attackRadius = 0.1f;
     [SerializeField] private float StopNearPlayer;
     [SerializeField] private float isNearPlayer;
+    [SerializeField] private float attackSpeed;
+    [SerializeField] private float lifeSpawnChancePercent;
     [SerializeField] private bool activatedVariant = false;
+    [SerializeField] private float selfHealth;
     private Vector3 enemyToPlayer;
     private float enemyToPlayerDist;
     public float attackTimer;
-    
 
     private bool canMove = true;
     private bool StartMove = false;
@@ -42,7 +49,9 @@ public class Melee_Enemy_Script : MonoBehaviour
             Attack();
             CanMove(); 
         }
-        
+
+        CheckDeath();
+
     }
     private void EnemyToPlayer()
     {
@@ -86,9 +95,8 @@ public class Melee_Enemy_Script : MonoBehaviour
 
         if (enemyToPlayerDist < attackRadius)
         {
-            
             print("Attack !");
-            Destroy(player);
+            InstatiateAttack();
         }
         attackBar.fillAmount = 0;
         isAttacking = false;
@@ -122,4 +130,59 @@ public class Melee_Enemy_Script : MonoBehaviour
             canMove = false;
         }
     }
+    
+    private void InstatiateAttack()
+    {
+            GameObject spawnedMissile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+
+            Projectile projectile = spawnedMissile.GetComponent<Projectile>();
+            projectile.speed = spawnPoint.up * attackSpeed;
+            
+            projectile.owner = gameObject;
+    }
+    void Die()
+    {
+        GameManager.Instance.AddEnemyKill();
+        Destroy(gameObject);
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Projectile proj = other.gameObject.GetComponent<Projectile>();
+
+        if (proj != null && proj.owner != gameObject)
+        {
+            TakeDamage();
+        }
+    }
+    
+    private void TakeDamage()
+    {
+        selfHealth -= 1;
+    }
+
+    private void CheckDeath()
+    {
+        if (selfHealth <= 0)
+        {
+            GameManager.Instance.AddEnemyKill();
+            SpawnLifeOnDeath();
+            Destroy(gameObject);
+        }
+    }
+
+    private void SpawnLifeOnDeath()
+    {
+        float randomNumber = Random.Range(0, 100);
+
+        if (randomNumber <= lifeSpawnChancePercent)
+        {
+            Instantiate(
+                lifePrefab,
+                enemy.transform.position,
+                Quaternion.Euler(0, 0, -45)
+            );
+        }
+    }
+
 }
+
