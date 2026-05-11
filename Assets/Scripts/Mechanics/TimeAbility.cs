@@ -1,34 +1,55 @@
-using System;
 using UnityEngine;
 
 public class TimeAbility : MonoBehaviour
 {
-    [Header("Réglages du time slow")]
+    [Header("Time Settings")]
     public float slowTimeScale = 0.2f;
-    public float normalTimeScale = 1.0f;
-    
-    private bool isSlowed = false;
+    public float duration = 2f;
+    public float cooldownTime = 5f;
 
-     void Update()
+    [Header("Status (Read Only)")]
+    public bool isSlowed = false;
+    public bool isOnCooldown = false;
+    
+    private float abilityTimer;
+    private float cooldownTimer;
+
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        
+        if (Input.GetKeyDown(KeyCode.E) && !isSlowed && !isOnCooldown)
         {
-            ToggleTimeSlow();
-        }   
+            StartCoroutine(ActivateTimeSlow());
+        }
+
+        
+        if (isOnCooldown)
+        {
+            cooldownTimer -= Time.unscaledDeltaTime;
+            if (cooldownTimer <= 0)
+            {
+                isOnCooldown = false;
+            }
+        }
     }
 
-    void ToggleTimeSlow()
+    System.Collections.IEnumerator ActivateTimeSlow()
     {
-        isSlowed = !isSlowed;
-        if (isSlowed)
-        {
-            Time.timeScale = slowTimeScale;
-            Time.fixedDeltaTime = 0.02f *Time.timeScale;
-        }
-        else
-        {
-            Time.timeScale = normalTimeScale;
-            Time.fixedDeltaTime = 0.02f ;
-        }
+        isSlowed = true;
+        Time.timeScale = slowTimeScale;
+        
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+       
+        yield return new WaitForSecondsRealtime(duration);
+
+     
+        Time.timeScale = 1.0f;
+        Time.fixedDeltaTime = 0.02f;
+        isSlowed = false;
+
+       
+        isOnCooldown = true;
+        cooldownTimer = cooldownTime;
     }
 }

@@ -176,14 +176,23 @@ public  class GameManager : MonoBehaviour
           if (godMode == false)
           {
              playerHealth = 1000;
+             
+             PlayerMovement.Instance.runSpeed = 10;
+             PlayerMovement.Instance.dashCoolDown = 0;
+             Parry.Instance.cooldownTime = 0;
              godMode  = true;
-                  
+
+
           }
                         
-          else if (godMode == true &&  playerHealth >= 4)
+          else if (godMode == true )
           {
+             Debug.Log("godmode false");
              playerHealth = 3;
              godMode  = false;
+             PlayerMovement.Instance.runSpeed =  5f ;
+             PlayerMovement.Instance.dashCoolDown = 1f;
+             Parry.Instance.cooldownTime = 0.1f;
           }
       }
      

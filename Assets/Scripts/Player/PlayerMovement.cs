@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
         //  ---- Mouvement et Direction ----
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
@@ -59,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Reload();
         }
+        Enablecollision();
 
     }
 
@@ -102,6 +104,20 @@ public class PlayerMovement : MonoBehaviour
     public void SpeedUpgrade()
     {
         runSpeed += speedUpgradeAmount;
+    }
+
+    public void Enablecollision()
+    {
+        if (GameManager.Instance.godMode == true)
+        {
+            Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
+            rb2d.bodyType = RigidbodyType2D.Kinematic;
+        }
+        else
+        {
+            Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
+            rb2d.bodyType = RigidbodyType2D.Dynamic;
+        }
     }
     
 }
