@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private float _timer;
     private bool _canDash;
 
+    private PlatformScript currentPlatform;
+
     public float dashDistance = 1.2f;
     public float runSpeed = 5f;
     public float dashCoolDown = 1f;
@@ -21,18 +23,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        body = GetComponent<Rigidbody2D>();
-
-        Instance = this;
-
-        
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        
+        Instance = this;
+
+        body = GetComponent<Rigidbody2D>();
         body.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
 
@@ -65,7 +64,14 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        body.linearVelocity = moveDirection * runSpeed;
+        Vector2 movement = moveDirection * runSpeed;
+
+        if (currentPlatform != null)
+        {
+            movement += (Vector2)currentPlatform.PlatformVelocity;
+        }
+
+        body.linearVelocity = movement;
     }
 
     private IEnumerator Dash()
@@ -77,13 +83,16 @@ public class PlayerMovement : MonoBehaviour
 
         Invincible();
 
-        // ✔️ stop mouvement actuel
         body.linearVelocity = Vector2.zero;
 
-        // ✔️ dash instantané propre
         body.MovePosition(body.position + moveDirection * dashDistance);
 
         yield return null;
+    }
+
+    public void SetCurrentPlatform(PlatformScript platform)
+    {
+        currentPlatform = platform;
     }
 
     private void Reload()

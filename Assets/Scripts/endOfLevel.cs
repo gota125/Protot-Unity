@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class NewMonoBehaviourScript : MonoBehaviour
 {
     private bool noMoreEnemy = false;
-    private bool PlayerOnEndLevel = false;
+    
     
     void Update()
     {
