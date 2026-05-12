@@ -361,6 +361,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1281714667736374170, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5324970681912303107}
+    - targetCorrespondingSourceObject: {fileID: 1281714667736374170, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3490453530647017310}
   m_SourcePrefab: {fileID: 100100000, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
 --- !u!1 &1022850581930492442 stripped
 GameObject:
@@ -384,6 +387,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a27c7f1e4a8a64a95bfb2cc6d3b5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCheckpoint_Script
+--- !u!114 &-3490453530647017310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3942337075975652244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ab99d017a905542ab6fd52f32682ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimeAbility
+  slowTimeScale: 0.2
+  duration: 2
+  cooldownTime: 5
+  isSlowed: 0
+  isOnCooldown: 0
 --- !u!4 &4146434270875264442 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2231382011064532404, guid: 2dda41d3cb6185641a807e933fbc124c, type: 3}
