@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerDeath : MonoBehaviour
@@ -34,10 +35,7 @@ public class PlayerDeath : MonoBehaviour
         {
             GameManager.Instance.PlayerTakeDamage();
         }
-        if (other.gameObject.tag == "Checkpoint")
-        {
-            GameManager.Instance.PlayerTakeDamage();
-        }
+        
         
     }
     
