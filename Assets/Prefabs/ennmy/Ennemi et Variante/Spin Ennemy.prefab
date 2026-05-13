@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a292a027a26009f4fb9483e17b87964e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Canon
-  Projectile: {fileID: 7495483748815174451, guid: 8af5ceef16c8f6e4ca6bf92e57a09bd2, type: 3}
+  Projectile: {fileID: 4621621528378486484, guid: ea5af3bac41561f429360deb959682df, type: 3}
   fireRate: 1
   direction: {x: 0, y: 0}
   FirePoint: {fileID: 6563586852190998842}
@@ -667,7 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a292a027a26009f4fb9483e17b87964e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Canon
-  Projectile: {fileID: 7495483748815174451, guid: 8af5ceef16c8f6e4ca6bf92e57a09bd2, type: 3}
+  Projectile: {fileID: 4621621528378486484, guid: ea5af3bac41561f429360deb959682df, type: 3}
   fireRate: 1
   direction: {x: 0, y: 0}
   FirePoint: {fileID: 6260502001199007580}
@@ -813,7 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a292a027a26009f4fb9483e17b87964e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Canon
-  Projectile: {fileID: 7495483748815174451, guid: 8af5ceef16c8f6e4ca6bf92e57a09bd2, type: 3}
+  Projectile: {fileID: 4621621528378486484, guid: ea5af3bac41561f429360deb959682df, type: 3}
   fireRate: 1
   direction: {x: 0, y: 0}
   FirePoint: {fileID: 4012168873199924688}
@@ -868,7 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a292a027a26009f4fb9483e17b87964e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Canon
-  Projectile: {fileID: 7495483748815174451, guid: 8af5ceef16c8f6e4ca6bf92e57a09bd2, type: 3}
+  Projectile: {fileID: 4621621528378486484, guid: ea5af3bac41561f429360deb959682df, type: 3}
   fireRate: 1
   direction: {x: 0, y: 0}
   FirePoint: {fileID: 2796234155008419771}
