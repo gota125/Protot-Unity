@@ -11,6 +11,7 @@ public class Parry : MonoBehaviour
     [SerializeField] private float parryWindow = 0.15f; 
     public float cooldownTime = 2f;
     public Color parryColor = Color.cyan;
+    public bool Mupltyparade=false;
 
     [Header("References")]
     public Image cooldownImage;
@@ -68,6 +69,11 @@ public class Parry : MonoBehaviour
 
                 // APPEL DE TA NOUVELLE FONCTION
                 projectile.ChangeOwnership(gameObject, parryColor);
+                if (projectile.owner == gameObject && Mupltyparade == true)
+                {
+                    timer = 0;
+                }
+                
 
                 // On arrête la parade immédiatement après un succès pour éviter de parer 50 fois
                 isParry = false; 
