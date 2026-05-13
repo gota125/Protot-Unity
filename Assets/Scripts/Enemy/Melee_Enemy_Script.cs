@@ -50,6 +50,7 @@ public class Melee_Enemy_Script : MonoBehaviour
             CanMove(); 
         }
 
+        Debug.Log(selfHealth);
         CheckDeath();
 
     }
