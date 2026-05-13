@@ -37,11 +37,14 @@ public class RandomMove : MonoBehaviour
         }
 
         timer += Time.deltaTime;
+        Debug.Log(timer);
+        Debug.Log(changeDirectionDelay);
 
         if (timer >= changeDirectionDelay)
         {
             ChooseNewDirection();
             timer = 0;
+            Debug.Log("choose new direction");
         }
 
         rb.constraints = isMoving
@@ -51,16 +54,17 @@ public class RandomMove : MonoBehaviour
     void FixedUpdate()
     {
         if (!enemyScript.HasDetectedPlayer)
-            return;
+            return;Debug.Log("hasdetectedplayer");
 
         if (isMoving)
         {
             rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
+            Debug.Log("rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);");
         }
     }
 
  void  ChooseNewDirection()
-    {
+    {Debug.Log ("Choose new direction methode");
         float randomAngle = Random.Range(0, 360) * Mathf.Deg2Rad;;
         movementDirection = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle) );
         
@@ -74,6 +78,7 @@ public class RandomMove : MonoBehaviour
         while (true)
         {
             isMoving = true;
+            Debug.Log("is moving");
             yield return new WaitForSeconds(Random.Range(1f, 3f));
 
             isMoving = false;

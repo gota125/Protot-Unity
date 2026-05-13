@@ -100,10 +100,15 @@ public class EnemyScript : MonoBehaviour
     private void UpdateShootingState()
     {
         if (distanceToPlayer < detectionRange)
+        {
             canShoot = true;
+            hasStartedShooting = true;
+        }
+
         if (distanceToPlayer > forgetPlayer)
         {
             canShoot = false;
+            hasStartedShooting =  false;
         }
 
         
