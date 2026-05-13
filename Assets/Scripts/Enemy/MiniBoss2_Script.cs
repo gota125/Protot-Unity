@@ -82,6 +82,7 @@ public class MiniBoss2_Script : MonoBehaviour
         Debug.Log("Le Boss a pris des dégâts ! Vie restante : " + currentHealth);
     }
     
+    
 }
 
 

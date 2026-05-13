@@ -9,15 +9,27 @@ public class Canon : MonoBehaviour
    public Transform FirePoint;
    public GameObject self;
    public float SpeedProjectile;
+   public float detectionRange;
+   public float forgetPlayer;
+   public float distanceToPlayer;
+   public GameObject player;
+   public bool canShoot = false;
   
     
     
     void Update()
     {
+        UpdateDistanceToPlayer();
+        UpdateShootingState();
         if (Time.time > nextFire)
         {
-            FireProjectile();
-            nextFire = Time.time + 1f/fireRate;
+            if (canShoot)
+            {
+
+
+                FireProjectile();
+                nextFire = Time.time + 1f / fireRate;
+            }
         }
         
     }
@@ -29,6 +41,28 @@ public class Canon : MonoBehaviour
 
         Projectile projectile = spawnedMissile.GetComponent<Projectile>();
         projectile.speed = -FirePoint.up * SpeedProjectile;
+    }
+    private void UpdateDistanceToPlayer()
+    {
+        distanceToPlayer = Vector2.Distance(self.transform.position, player.transform.position);
+        
+    }
+
+    private void UpdateShootingState()
+    {
+        if (distanceToPlayer < detectionRange)
+        {
+            canShoot = true;
+            
+        }
+
+        if (distanceToPlayer > forgetPlayer)
+        {
+            canShoot = false;
+            
+        }
+
+        
     }
 }
 

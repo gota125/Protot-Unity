@@ -128,6 +128,7 @@ public  class GameManager : MonoBehaviour
    }
    
    
+   
    public void PlayerTakeDamage()
    {
       if (isInvincible)
